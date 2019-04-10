@@ -1,0 +1,11 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[tool.flit.metadata]
+module = "mypkg"
+author = ""
+author-email = ""
+license = "..."
+keywords = ""
+classifiers = []

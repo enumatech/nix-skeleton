@@ -9,8 +9,28 @@ with import (
   }
 ) { };
 
+with python3.pkgs;
+
 mkShell {
   buildInputs = [
-    # dependencies go here
+
+    (buildPythonPackage {
+      name = "mypkg";
+      src = ./.;
+      format = "flit";
+
+      propagatedBuildInputs = [
+        pytest
+        black
+      ];
+
+      # checkInputs = [ pytest ];
+      # checkPhase = "pytest";
+      # doCheck = true;
+
+      # don't create .pyc files
+      PYTHONDONTWRITEBYTECODE = "1";
+    })
+
   ];
 }
