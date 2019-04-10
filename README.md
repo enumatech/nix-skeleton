@@ -6,6 +6,13 @@ Pre-requisites: `nix`, `direnv` and optionally `lorri`.
 
 - Pinned `nixpkgs`.
 
+## Usage
+
+```bash
+git init  # Or however you initialize your new project.
+git pull https://github.com/enumatech/nix-skeleton $PROJECT_TYPE
+```
+
 ## Project types
 
 Note: please put project types on a specific branch, such as `python-poetry`
