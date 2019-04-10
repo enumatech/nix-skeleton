@@ -18,4 +18,5 @@ git pull https://github.com/enumatech/nix-skeleton $PROJECT_TYPE
 Note: please put project types on a specific branch, such as `python-poetry`
 or `node-pnpm` and then add a link to the list below.
 
-- [python](https://github.com/enumatech/nix-skeleton/tree/python)
+- [python-flit](https://github.com/enumatech/nix-skeleton/tree/python-flit):
+  Python package without `setup.py` that uses `flit` for packaging.
