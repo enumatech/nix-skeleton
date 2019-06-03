@@ -1,3 +1,18 @@
-# Uses `callPackage` to the app's derivation. Shouldn't need any other customization. Used by `nix-build`.
-{ pkgs ? import nix/nixpkgs.nix {} }:
-pkgs.callPackage ./derivation.nix {}
+{ pkgs ? import nix/nixpkgs.nix { } }:
+with pkgs;
+
+stdenv.mkDerivation {
+
+  name = "myapp";
+  src = lib.cleanSource ./.;
+
+  installPhase = ''
+    mkdir -p $out/bin
+    cp hello $out/bin
+  '';
+
+  buildInputs = [
+    # dependencies go here
+  ];
+
+}
