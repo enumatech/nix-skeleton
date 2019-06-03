@@ -1,13 +1,21 @@
 # Nix skeleton
 
-Pre-requisites: `nix`, `direnv` and optionally `lorri`.
+Pre-requisites: `nix`, optionally `direnv`.
 
-## Features
+## Development
+```bash
+nix-shell
+# or with direnv
+direnv allow
+```
 
-- Pinned `nixpkgs`.
+## Build docker container
+```bash
+nix-build container.nix
+docker load --input result
+```
 
-## Usage
-
+## New project
 ```bash
 git init  # Or however you initialize your new project.
 git pull https://github.com/enumatech/nix-skeleton $PROJECT_TYPE

@@ -1,36 +1,27 @@
+# Setup dev env using mkShell. Takes opt {pkgs} defaults to pinned `nixpkgs.nix`. Used by `nix-shell`.
+{ pkgs ? import nix/nixpkgs.nix {} }:
+
+with pkgs;
+
 let
-  pkgs = import <nixpkgs> { };
-  pinnedNixpkgs = pkgs.lib.importJSON ./nix/nixpkgs.json;
-in
-with import (
-  builtins.fetchTarball {
-    url = pinnedNixpkgs.url;
-    sha256 = pinnedNixpkgs.sha256;
-  }
-) { };
+  python = python3;
+  pkg = callPackage ./default.nix { python = python3; };
+in mkShell {
 
-with python3.pkgs;
-
-mkShell {
   buildInputs = [
 
-    (buildPythonPackage {
-      name = "mypkg";
-      src = ./.;
-      format = "flit";
+    (python.withPackages (ps: with ps; [
 
-      propagatedBuildInputs = [
         pytest
         black
-      ];
 
-      # checkInputs = [ pytest ];
-      # checkPhase = "pytest";
-      # doCheck = true;
+        (pkg.overridePythonAttrs (old: {
+          doCheck = false;
+        }))
 
-      # don't create .pyc files
-      PYTHONDONTWRITEBYTECODE = "1";
-    })
-
+    ]))
   ];
+
+  # don't create .pyc files
+  PYTHONDONTWRITEBYTECODE = "1";
 }
