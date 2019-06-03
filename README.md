@@ -1,6 +1,6 @@
 # Nix skeleton
 
-Pre-requisites: `nix`, `direnv` and optionally `lorri`.
+Pre-requisites: `nix`, optionally `direnv`.
 
 ## Features
 
