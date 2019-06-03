@@ -1,16 +1,8 @@
-let
-  pkgs = import <nixpkgs> { };
-  pinnedNixpkgs = pkgs.lib.importJSON ./nix/nixpkgs.json;
-in
-with import (
-  builtins.fetchTarball {
-    url = pinnedNixpkgs.url;
-    sha256 = pinnedNixpkgs.sha256;
-  }
-) { };
+# Setup dev env using mkShell. Takes opt {pkgs} defaults to pinned `nixpkgs.nix`. Used by `nix-shell`.
+{ pkgs ? import nix/nixpkgs.nix {} }:
 
-mkShell {
+pkgs.mkShell {
   buildInputs = [
-    # dependencies go here
+    # dev dependencies go here
   ];
 }
