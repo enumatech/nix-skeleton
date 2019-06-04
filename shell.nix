@@ -2,10 +2,17 @@
 { pkgs ? import nix/nixpkgs.nix {} }:
 with pkgs;
 
-let pkg = callPackage ./default.nix {};
+let
+  pkg = import ./default.nix { inherit pkgs; };
 
 in mkShell {
+
   buildInputs = [
-    pkg
-  ];
+    # additional runtime dependencies go here
+  ] ++ pkg.buildInputs ++ pkg.propagatedBuildInputs;
+
+  nativeBuildInputs = [
+    # additional dev dependencies go here
+  ] ++ pkg.nativeBuildInputs;
+
 }

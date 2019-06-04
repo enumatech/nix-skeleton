@@ -12,7 +12,11 @@ stdenv.mkDerivation {
   '';
 
   buildInputs = [
-    # dependencies go here
+    # runtime dependencies go here
+  ];
+
+  nativeBuildInputs = [
+    # build dependencies go here
   ];
 
 }
