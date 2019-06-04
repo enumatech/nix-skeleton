@@ -1,6 +1,6 @@
 # Nix skeleton
 
-Pre-requisites: `nix`, optionally `direnv`.
+Pre-requisites: [nix](https://nixos.org/nix/), optionally [direnv](https://direnv.net/).
 
 ## Development
 ```bash
