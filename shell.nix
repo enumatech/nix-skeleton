@@ -3,16 +3,19 @@
   overlays = [ (import ./nix/overlay.nix) ];
 } }:
 
+# Replacing everything below with `pkgs.python3.pkgs.my-pkg` works too,
+# but don't know how to add extra development dependencies in that
+# case.
+
 with pkgs;
 
-mkShell {
+let pkg = python3.pkgs.my-pkg;
+in mkShell {
 
   buildInputs = [
-    (python3.withPackages (ps: with ps; [
-      (my-pkg.overridePythonAttrs (old: {
-        doCheck = false;
-      }))
-    ]))
-  ];
+    # any extra dev dependencies
+  ] ++ pkg.buildInputs ++ pkg.propagatedBuildInputs;
+
+  shellHook = pkg.shellHook;
 
 }
