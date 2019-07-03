@@ -1,18 +1,12 @@
-{ pkgs ? import nix/nixpkgs.nix { } }:
-with pkgs;
+{ lib, buildPythonPackage, click }:
 
-stdenv.mkDerivation {
+buildPythonPackage {
 
-  name = "myapp";
+  name = "my-pkg";
   src = lib.cleanSource ./.;
 
-  installPhase = ''
-    mkdir -p $out/bin
-    cp hello $out/bin
-  '';
-
-  buildInputs = [
-    # runtime dependencies go here
+  propagatedBuildInputs = [
+    click
   ];
 
   nativeBuildInputs = [

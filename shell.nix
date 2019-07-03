@@ -1,18 +1,18 @@
 # Setup dev env using mkShell. Takes opt {pkgs} defaults to pinned `nixpkgs.nix`. Used by `nix-shell`.
-{ pkgs ? import nix/nixpkgs.nix {} }:
+{ pkgs ? import nix/nixpkgs.nix {
+  overlays = [ (import ./nix/overlay.nix) ];
+} }:
+
 with pkgs;
 
-let
-  pkg = import ./default.nix { inherit pkgs; };
-
-in mkShell {
+mkShell {
 
   buildInputs = [
-    # additional runtime dependencies go here
-  ] ++ pkg.buildInputs ++ pkg.propagatedBuildInputs;
-
-  nativeBuildInputs = [
-    # additional dev dependencies go here
-  ] ++ pkg.nativeBuildInputs;
+    (python3.withPackages (ps: with ps; [
+      (my-pkg.overridePythonAttrs (old: {
+        doCheck = false;
+      }))
+    ]))
+  ];
 
 }
