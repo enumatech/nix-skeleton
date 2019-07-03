@@ -12,6 +12,7 @@ buildPythonPackage {
   checkInputs = [
     pytest
   ];
+  checkPhase = "pytest";
 
   nativeBuildInputs = [
     # build dependencies go here

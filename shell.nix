@@ -11,4 +11,5 @@ python3.pkgs.my-pkg.overridePythonAttrs(old: {
     python3.pkgs.flake8
     # whatever else you need
   ];
+  PYTHONDONTWRITEBYTECODE = "1";
 })
