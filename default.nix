@@ -1,4 +1,4 @@
-{ lib, buildPythonPackage, click }:
+{ lib, buildPythonPackage, click, pytest }:
 
 buildPythonPackage {
 
@@ -7,6 +7,10 @@ buildPythonPackage {
 
   propagatedBuildInputs = [
     click
+  ];
+
+  checkInputs = [
+    pytest
   ];
 
   nativeBuildInputs = [
