@@ -1,4 +1,4 @@
-from .. import __version__
+from mypkg import __version__
 
 
 def test_dummy():

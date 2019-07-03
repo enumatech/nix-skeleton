@@ -27,7 +27,8 @@ setup(
     author=AUTHOR,
     author_email=EMAIL,
     url=URL,
-    packages=find_packages(exclude=("tests",)),
+    packages=find_packages(where="src", exclude=("tests",)),
+    package_dir={"": "src"},
     entry_points={"console_scripts": ["cli = mypkg.cli:main"]},
     install_requires=REQUIRED,
 )
