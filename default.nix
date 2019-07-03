@@ -1,13 +1,18 @@
-{ pkgs ? import nix/nixpkgs.nix { }, python ? pkgs.python3}:
-
-with python.pkgs;
+{ lib, buildPythonPackage, setuptools, click, pytest }:
 
 buildPythonPackage {
-  name = "mypkg";
-  src = pkgs.lib.cleanSource ./.;
+
+  name = "my-pkg";
+  src = lib.cleanSource ./.;
   format = "flit";
 
-  doCheck = true;
-  checkInputs = [ pytest ];
-  checkPhase = "pytest";
+  propagatedBuildInputs = [
+    click
+    setuptools
+  ];
+
+  checkInputs = [
+    pytest
+  ];
+
 }

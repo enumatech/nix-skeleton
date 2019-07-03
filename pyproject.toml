@@ -9,3 +9,9 @@ author-email = ""
 license = "..."
 keywords = ""
 classifiers = []
+requires = [
+  "click"
+]
+
+[tool.flit.scripts]
+cli = 'mypkg:cli.main'

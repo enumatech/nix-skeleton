@@ -4,12 +4,15 @@
 
 # Using <nixpkgs> here (as opposed to ./nixpkgs.nix) to avoid having to
 # build the docker tooling.
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> {
+  overlays = [ (import ./nix/overlay.nix) ];
+} }:
 
-let
-  myapp = import ./default.nix {};
+with pkgs;
 
-in pkgs.dockerTools.buildImage {
+let myapp = python3.pkgs.my-pkg;
+in
+pkgs.dockerTools.buildImage {
   name = myapp.name;
   tag = "latest";
   # runAsRoot = ''
@@ -25,9 +28,7 @@ in pkgs.dockerTools.buildImage {
       "HTTP_PLATFORM_PORT=80"
     ];
     Cmd = [
-      "${myapp}/bin/myapp"
-      "--user"
-      "nobody"
+      "${myapp}/bin/cli"
     ];
     ExposedPorts = {
       "80/tcp" = {};
