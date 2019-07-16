@@ -1,18 +1,20 @@
-{ lib, buildPythonPackage, setuptools, click, pytest }:
+{ lib, buildPythonPackage, click, pytest, poetry }:
 
 buildPythonPackage {
 
   name = "my-pkg";
   src = lib.cleanSource ./.;
-  format = "flit";
+  format = "pyproject";
 
   propagatedBuildInputs = [
     click
-    setuptools
+    poetry
   ];
 
-  checkInputs = [
+  doCheck = true;
+  checkPhase = ''
     pytest
-  ];
+  '';
+  checkInputs = [ pytest ];
 
 }

@@ -5,11 +5,8 @@
 
 with pkgs;
 
-python3.pkgs.my-pkg.overridePythonAttrs(old: {
-  propagatedBuildInputs = (old.propagatedBuildInputs or []) ++ [
-    entr
-    python3.pkgs.flake8
-    python3.pkgs.black
-    # whatever else you need
+mkShell {
+  buildInputs = [
+    poetry
   ];
-})
+}
